@@ -8,9 +8,11 @@
     <link href="css/metisMenu.min.css" rel="stylesheet">
     <link href="css/timeline.css" rel="stylesheet">
     <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link href="css/dashboard.css" rel="stylesheet">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
     <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/metisMenu.min.js"></script>
     <script src="js/sb-admin-2.js"></script>
@@ -19,6 +21,23 @@
       function toggleDiv(divId) {
         $("#"+divId).toggle();
       };
+
+      $(function () {
+            $(".col-lg-8").sortable({
+                tolerance: 'pointer',
+                revert: 'invalid',
+                placeholder: 'span2 well placeholder',
+                forceHelperSize: true
+            });
+        });
+      $(function () {
+            $(".col-lg-4").sortable({
+                tolerance: 'pointer',
+                revert: 'invalid',
+                placeholder: 'span2 well placeholder',
+                forceHelperSize: true
+            });
+        });
     </script>
   </head>
   <body>
@@ -76,7 +95,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="panel panel-default">
-                        <div  class="panel-heading">
+                        <div class="panel-heading">
                             <i class="fa fa-bar-chart-o fa-fw"></i> Div1
                             <div class="pull-right">
                                 <div class="btn-group">
@@ -92,7 +111,7 @@
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
-                    <div class="panel panel-default">
+                    <div id="divMove" class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-bar-chart-o fa-fw"></i> Div2
                             <div class="pull-right">
@@ -169,7 +188,6 @@
             <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
-
     </div>
     <!-- /#wrapper -->    
   </body>
