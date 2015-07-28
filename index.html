@@ -18,11 +18,23 @@
     <script src="js/sb-admin-2.js"></script>
 
     <script type='text/javascript'>
-      function toggleDiv(divId) {
-        $("#"+divId).toggle();
-      };
+        $(document).ready(function() {
+            $( "#sortable1,#sortable2" ).sortable({
+                connectWith: "#sortable1, #sortable2",
+                tolerance: 'pointer',
+                revert: 'invalid',
+                placeholder: 'span2 well placeholder',
+                forceHelperSize: true
+            });
+            $( "#sortable1, #sortable2" ).disableSelection();
+        });
 
-      $(function () {
+        function toggleDiv(divId) {
+            $("#"+divId).toggle();
+        };
+
+        /*
+        $(function () {
             $(".col-lg-8").sortable({
                 tolerance: 'pointer',
                 revert: 'invalid',
@@ -30,7 +42,8 @@
                 forceHelperSize: true
             });
         });
-      $(function () {
+      
+        $(function () {
             $(".col-lg-4").sortable({
                 tolerance: 'pointer',
                 revert: 'invalid',
@@ -38,6 +51,7 @@
                 forceHelperSize: true
             });
         });
+        */
     </script>
   </head>
   <body>
@@ -92,8 +106,9 @@
                 
             </div>
             <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-8">
+            
+            <div  class="row">
+                <div id="sortable1" class="col-lg-8">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-bar-chart-o fa-fw"></i> Div1
@@ -147,7 +162,7 @@
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-8 -->
-                <div class="col-lg-4">
+                <div id="sortable2" class="col-lg-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-bell fa-fw"></i> Div4
