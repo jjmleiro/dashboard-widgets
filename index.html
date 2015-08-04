@@ -33,25 +33,22 @@
             $("#"+divId).toggle();
         };
 
-        /*
-        $(function () {
-            $(".col-lg-8").sortable({
-                tolerance: 'pointer',
-                revert: 'invalid',
-                placeholder: 'span2 well placeholder',
-                forceHelperSize: true
+        function refreshDiv(divId, page) {
+            $("#imgLoading").show();
+
+            $("#"+divId).load(page, function(response, status, xhr){
+                if(status == "success")
+                    console.log("Todo OK!");
+                if(status == "error")
+                    console.log("Error: " + xhr.status);
+
+                $("#imgLoading").hide();
             });
-        });
-      
-        $(function () {
-            $(".col-lg-4").sortable({
-                tolerance: 'pointer',
-                revert: 'invalid',
-                placeholder: 'span2 well placeholder',
-                forceHelperSize: true
-            });
-        });
-        */
+        };
+
+        function closeDiv(divId) {
+            $("#"+divId).hide();
+        };
     </script>
   </head>
   <body>
@@ -64,9 +61,30 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Dashboard Widgets</a>
+                <a href="index.html" class="pull-left"><img border="0" width="115px" height="54px" src="img/logo.png" alt="Keedio"></a>
             </div>
             <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <a href="index.html"><i class="fa fa-refresh"></i></a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+            </ul>
 
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -78,10 +96,10 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Menu<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Link1</a>
+                                    <a href="lines.html">Link1</a>
                                 </li>
                                 <li>
-                                    <a href="#">Link2</a>
+                                    <a href="gauge.html">Link2</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -109,31 +127,42 @@
             
             <div  class="row">
                 <div id="sortable1" class="col-lg-8">
-                    <div class="panel panel-default">
+                    <div id="div1-default" class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-bar-chart-o fa-fw"></i> Div1
-                            <div class="pull-right">
-                                <div class="btn-group">
-                                      <a class="btn" onclick="toggleDiv('div1')" href="#"><i class="fa fa-caret-square-o-down"></i></a>
-                                      <a class="btn" href="#"><i class="fa fa-times"></i></a>
-                                </div>
+                            <div class="pull-right box-icons">
+                                <a href="#" onclick="toggleDiv('div1')">
+                                    <i class="fa fa-chevron-down"></i>
+                                </a>
+                                <a href="#" onclick="refreshDiv('div1', 'lines.html')">
+                                    <i class="fa fa-refresh"></i>
+                                </a>
+                                <a href="#" onclick="closeDiv('div1-default')">
+                                    <i class="fa fa-times"></i>
+                                </a>
                             </div>
                         </div>
                         <!-- /.panel-heading -->
                         <div id="div1" class="panel-body">
-                            
+                            <iframe id="iLines" src="lines.html" class="iframe"></iframe>
+                            <img id="imgLoading" src="img/spinner.gif" class="hide"/>
                         </div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
-                    <div id="divMove" class="panel panel-default">
+                    <div id="div2-default" class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-bar-chart-o fa-fw"></i> Div2
-                            <div class="pull-right">
-                                <div class="btn-group">
-                                      <a class="btn" onclick="toggleDiv('div2')" href="#"><i class="fa fa-caret-square-o-down"></i></a>
-                                      <a class="btn" href="#"><i class="fa fa-times"></i></a>
-                                </div>
+                            <div class="pull-right box-icons">
+                                <a href="#" onclick="toggleDiv('div2')">
+                                    <i class="fa fa-chevron-down"></i>
+                                </a>
+                                <a href="#" onclick="">
+                                    <i class="fa fa-refresh"></i>
+                                </a>
+                                <a href="#" onclick="closeDiv('div2-default')">
+                                    <i class="fa fa-times"></i>
+                                </a>
                             </div>
                         </div>
                         <!-- /.panel-heading -->
@@ -143,14 +172,19 @@
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
-                    <div class="panel panel-default">
+                    <div id="div3-default" class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-clock-o fa-fw"></i> Div3
-                            <div class="pull-right">
-                                <div class="btn-group">
-                                      <a class="btn" onclick="toggleDiv('div3')" href="#"><i class="fa fa-caret-square-o-down"></i></a>
-                                      <a class="btn" href="#"><i class="fa fa-times"></i></a>
-                                </div>
+                            <div class="pull-right box-icons">
+                                <a href="#" onclick="toggleDiv('div3')">
+                                    <i class="fa fa-chevron-down"></i>
+                                </a>
+                                <a href="#" onclick="">
+                                    <i class="fa fa-refresh"></i>
+                                </a>
+                                <a href="#" onclick="closeDiv('div3-default')">
+                                    <i class="fa fa-times"></i>
+                                </a>
                             </div>
                         </div>
                         <!-- /.panel-heading -->
@@ -163,31 +197,41 @@
                 </div>
                 <!-- /.col-lg-8 -->
                 <div id="sortable2" class="col-lg-4">
-                    <div class="panel panel-default">
+                    <div id="div4-default" class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-bell fa-fw"></i> Div4
-                            <div class="pull-right">
-                                <div class="btn-group">
-                                      <a class="btn" onclick="toggleDiv('div4')" href="#"><i class="fa fa-caret-square-o-down"></i></a>
-                                      <a class="btn" href="#"><i class="fa fa-times"></i></a>
-                                </div>
+                            <div class="pull-right box-icons">
+                                <a href="#" onclick="toggleDiv('div4')">
+                                    <i class="fa fa-chevron-down"></i>
+                                </a>
+                                <a href="#" onclick="refreshDiv('div4', 'gauge.html')">
+                                    <i class="fa fa-refresh"></i>
+                                </a>
+                                <a href="#" onclick="closeDiv('div4-default')">
+                                    <i class="fa fa-times"></i>
+                                </a>
                             </div>
                         </div>
                         <!-- /.panel-heading -->
                         <div id="div4" class="panel-body">
-                            
+                            <iframe id="iGauge" src="gauge.html" class="iframe"></iframe>
                         </div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
-                    <div class="panel panel-default">
+                    <div id="div5-default" class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-bar-chart-o fa-fw"></i> Div5
-                            <div class="pull-right">
-                                <div class="btn-group">
-                                      <a class="btn" onclick="toggleDiv('div5')" href="#"><i class="fa fa-caret-square-o-down"></i></a>
-                                      <a class="btn" href="#"><i class="fa fa-times"></i></a>
-                                </div>
+                            <div class="pull-right box-icons">
+                                <a href="#" onclick="toggleDiv('div5')">
+                                    <i class="fa fa-chevron-down"></i>
+                                </a>
+                                <a href="#" onclick="">
+                                    <i class="fa fa-refresh"></i>
+                                </a>
+                                <a href="#" onclick="closeDiv('div5-default')">
+                                    <i class="fa fa-times"></i>
+                                </a>
                             </div>
                         </div>
                         <div id="div5" class="panel-body">

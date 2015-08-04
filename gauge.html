@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Keedio. Dashboard Widgets</title>
+
+    <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/epoch.min.css" rel="stylesheet">
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/d3.js"></script>
+    <script src="js/epoch.min.js"></script>
+    
+    <script type='text/javascript'>
+        var GaugeData = function() {};
+
+        GaugeData.prototype.next = function() {
+            return Math.random();
+        };
+
+        window.GaugeData = GaugeData;
+    
+        $(function() {
+            var data = new GaugeData();
+
+            var charts = [
+                //$('#real-time-gauge').epoch({ type: 'time.gauge', value: data.next() }),
+                $('#real-time-gauge2').epoch({ type: 'time.gauge', value: data.next() })
+                //$('#real-time-gauge3').epoch({ type: 'time.gauge', value: data.next() }),
+                //$('#real-time-gauge4').epoch({ type: 'time.gauge', value: data.next() })
+            ];
+
+            function updateCharts() {
+                for (var i = 0; i < charts.length; i++) {
+                    charts[i].update(data.next());
+                }
+            }
+
+            setInterval(updateCharts, 1000);
+            updateCharts();
+        });
+    </script>
+
+  </head>
+
+  <body>
+    <div class="gauges">
+        <!--
+        <div id="real-time-gauge4" class="epoch gauge-large"></div>
+        <div id="real-time-gauge" class="epoch gauge-medium"></div>
+        -->
+        <div id="real-time-gauge2" class="epoch gauge-small"></div>
+        <!--
+        <div id="real-time-gauge3" class="epoch gauge-tiny"></div>
+        -->
+    </div>    
+  </body>
+</html>
