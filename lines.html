@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Keedio. Dashboard Widgets</title>
+
+    <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/epoch.min.css" rel="stylesheet">
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/d3.js"></script>
+    <script src="js/epoch.min.js"></script>
+
+    <script type='text/javascript'>
+        var RealTimeData = function(layers) {
+            this.layers = layers;
+            this.timestamp = ((new Date()).getTime() / 1000)|0;
+        };
+
+        RealTimeData.prototype.rand = function() {
+            return parseInt(Math.random() * 100) + 50;
+        };
+
+        RealTimeData.prototype.history = function(entries) {
+            if (typeof(entries) != 'number' || !entries) {
+                entries = 1;
+            }
+
+            var history = [];
+            for (var k = 0; k < this.layers; k++) {
+                history.push({ values: [] });
+            }
+
+            for (var i = 0; i < entries; i++) {
+                for (var j = 0; j < this.layers; j++) {
+                    history[j].values.push({time: this.timestamp, y: this.rand()});
+                }
+                this.timestamp++;
+            }
+
+            return history;
+        };
+
+        RealTimeData.prototype.next = function() {
+            var entry = [];
+            for (var i = 0; i < this.layers; i++) {
+                entry.push({ time: this.timestamp, y: this.rand() });
+            }
+            this.timestamp++;
+            return entry;
+        };
+
+        window.RealTimeData = RealTimeData;
+
+
+        $(function(){
+            var data = new RealTimeData(2);
+
+            var chart = $('#lineChart')
+                .epoch({
+                    type: 'time.line',
+                    data: data.history(),
+                    axes: ['left', 'bottom', 'right']
+                });
+
+            window.setInterval(function() { var x= data.next(); chart.push(x); }, 1000);
+            chart.push(data.next());
+        });
+    </script>
+  </head>
+
+  <body>
+    <div id="lineChart" class="epoch" style="min-width: 100%; min-height: 100px;"></div>
+  </body>
+</html>
