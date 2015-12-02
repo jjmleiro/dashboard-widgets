@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <title>Keedio. Dashboard Widgets</title>
 
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
     <link href="css/epoch.min.css" rel="stylesheet">
 
@@ -26,7 +29,9 @@
 
             var charts = [
                 //$('#real-time-gauge').epoch({ type: 'time.gauge', value: data.next() }),
-                $('#real-time-gauge2').epoch({ type: 'time.gauge', value: data.next() })
+                $('#real-time-gauge2').epoch({ type: 'time.gauge', value: data.next() }),
+                $('#real-time-gauge3').epoch({ type: 'time.gauge', value: data.next() }),
+                $('#real-time-gauge4').epoch({ type: 'time.gauge', value: data.next() })
                 //$('#real-time-gauge3').epoch({ type: 'time.gauge', value: data.next() }),
                 //$('#real-time-gauge4').epoch({ type: 'time.gauge', value: data.next() })
             ];
@@ -50,7 +55,17 @@
         <div id="real-time-gauge4" class="epoch gauge-large"></div>
         <div id="real-time-gauge" class="epoch gauge-medium"></div>
         -->
-        <div id="real-time-gauge2" class="epoch gauge-small"></div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div id="real-time-gauge2" class="epoch gauge-small"></div>            
+            </div>
+            <div class="col-lg-4">
+                <div id="real-time-gauge3" class="epoch gauge-small"></div>
+            </div>
+            <div class="col-lg-4">
+                <div id="real-time-gauge4" class="epoch gauge-small"></div>
+            </div>
+        </div>        
         <!--
         <div id="real-time-gauge3" class="epoch gauge-tiny"></div>
         -->
